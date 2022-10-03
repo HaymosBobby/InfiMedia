@@ -1,0 +1,49 @@
+.single_blog {
+  margin: 1rem;
+
+  .featured_image {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+
+    
+    img {
+      width: inherit;
+      height: 300px;
+      object-fit: cover;
+      transition: all 0.75s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+  
+    }
+  }
+
+  .single_blog_content {
+
+    p, .imaged_paragraph {
+      margin: 1rem 0;
+
+     img {
+      width: 300px;
+      height: 200px;
+      float: right;
+      object-fit: cover;
+
+      @media screen and (max-width: 768px) {
+        float: none;
+        width: 100%;
+      }
+     } 
+    }
+  }
+}
+
+.single_blog_page {
+  .container {
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+}

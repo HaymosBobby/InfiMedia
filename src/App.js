@@ -9,21 +9,29 @@ import WithoutNav from "./WithoutNav";
 import WithNav from "./WithNav";
 
 import "./styles/app.scss";
+import LogIn from "./pages/Admin/LogIn";
+import SignUp from "./pages/Admin/SignUp";
+import { AuthContextProvider } from "./context/AuthContext";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route element={<WithoutNav />}>
-          <Route exact path="/admin" element={<Admin />} />
-        </Route>
-        <Route element={<WithNav />}>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/blogs" element={<Blogs />} />
-          <Route exact path="/podcast" element={<PodcastPage />} />
-          <Route exact path="/blog-article" element={<SingleBlog />} />
-        </Route>
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route element={<WithoutNav />}>
+            <Route path="/admin" element={<ProtectedRoutes><Admin /></ProtectedRoutes>} />
+            <Route exact path="/login" element={<LogIn />} />
+            <Route exact path="/signup" element={<SignUp />} />
+          </Route>
+          <Route element={<WithNav />}>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/blogs" element={<Blogs />} />
+            <Route exact path="/podcast" element={<PodcastPage />} />
+            <Route exact path="/blog-article" element={<SingleBlog />} />
+          </Route>
+        </Routes>
+      </AuthContextProvider>
     </div>
   );
 }

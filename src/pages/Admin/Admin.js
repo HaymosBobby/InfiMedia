@@ -8,10 +8,10 @@ import {
 } from "firebase/firestore";
 import { db, auth, storage } from "../../components/firebase_config";
 import { signOut } from "firebase/auth";
-import {ref, uploadBytes} from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { v4} from "uuid"
+import { v4 } from "uuid";
 
 const Admin = () => {
   const { setIsAuth } = useContext(AuthContext);
@@ -33,6 +33,8 @@ const Admin = () => {
   const [col3, setCol3] = useState("");
   const [pic1, setPic1] = useState(null);
   const [pic2, setPic2] = useState(null);
+  const [pic1URL, setPic1URL] = useState("");
+  const [pic2URL, setPic2URL] = useState("");
 
   const blogsCollectionRef = collection(db, "blogs");
 
@@ -47,32 +49,32 @@ const Admin = () => {
       col3,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
       createdAt: Timestamp.now(),
+      pic1URL,
+      pic2URL,
     });
   };
 
-  const uploadImages= async () => {
-    if(pic1 === "null") return;
-    const imageRef = ref(storage, `images/${pic1.name + v4()}`)
+  const uploadImages = async () => {
+    if (pic1 === "null") return;
+    const imageRef = ref(storage, `images/${pic1.name + v4()}`);
     try {
-      await uploadBytes(imageRef, pic1)
-    (alert("image uploaded"))
+      await uploadBytes(imageRef, pic1)(alert("image uploaded"));
+    } catch (err) {
+      console.log(err.message);
     }
-    catch(err) {
-      console.log(err.message)
-    }
-  }
-  
-  const uploadPictures= async () => {
-    if(pic2 === "null") return;
-    const imageRef = ref(storage, `images/${pic2.name + v4()}`)
+  };
+
+  const uploadPictures = async () => {
+    if (pic2 === "null") return;
+    const imageRef = ref(storage, `images/${pic2.name + v4()}`);
     try {
-      await uploadBytes(imageRef, pic2)
-    (alert("image uploaded"))
+      await uploadBytes(imageRef, pic2)(alert("image uploaded"));
+    } catch (err) {
+      console.log(err.message);
     }
-    catch(err) {
-      console.log(err.message)
-    }
-  }
+  };
+
+  // I 1 2 4 Q
 
   return (
     <div className="admin">

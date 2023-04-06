@@ -39,7 +39,7 @@ const Blogs = () => {
           <Blog />
           <Blog />
           <Blog /> */}
-          {postList.length ===0 ? "loading..." :
+          {(postList.length === 0) ? "loading..." :
             postList.map(
               ({ title, excerpt, id, createdAt, col1, col2, col3, author }) => {
                 return (

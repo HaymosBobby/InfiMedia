@@ -13,6 +13,7 @@ import LogIn from "./pages/Admin/LogIn";
 import SignUp from "./pages/Admin/SignUp";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/blogs" element={<Blogs />} />
             <Route exact path="/podcast" element={<PodcastPage />} />
             <Route exact path="/blog-article" element={<SingleBlog />} />
+            <Route exact path="/about" element={<About />} />
           </Route>
         </Routes>
       </AuthContextProvider>

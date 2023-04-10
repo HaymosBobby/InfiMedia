@@ -21,7 +21,14 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route element={<WithoutNav />}>
-            <Route path="/admin" element={<ProtectedRoutes><Admin /></ProtectedRoutes>} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoutes>
+                  <Admin />
+                </ProtectedRoutes>
+              }
+            />
             <Route exact path="/login" element={<LogIn />} />
             <Route exact path="/signup" element={<SignUp />} />
           </Route>

@@ -8,11 +8,13 @@ export const AuthContextProvider = ({children}) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const value = {
     isAuth,setIsAuth,
     email,setEmail,
-    password,setPassword
+    password,setPassword,
+    confirmPassword,setConfirmPassword
   }
 
   return(

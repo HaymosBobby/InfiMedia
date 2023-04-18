@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { auth, provider } from "../../components/firebase_config";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+
+import Joi from "joi";
 
 const LogIn = () => {
   const { setIsAuth, email, password, setEmail, setPassword } =
@@ -10,19 +12,19 @@ const LogIn = () => {
 
   let navigate = useNavigate();
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((res) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true);
-      navigate("/admin", { replace: true });
-    });
-  };
+  // const signInWithGoogle = () => {
+  //   signInWithPopup(auth, provider).then((res) => {
+  //     localStorage.setItem("isAuth", true);
+  //     setIsAuth(true);
+  //     navigate("/admin/add-post", { replace: true });
+  //   });
+  // };
 
   // const signInWithEAP = async () => {
   //   try {
   //     await signInWithEmailAndPassword(auth, email, password);
   //     setIsAuth(true);
-  //     navigate("/admin", { replace: true });
+  //     navigate("/admin/add-post", { replace: true });
   //   } catch (err) {
   //     console.log(err.message);
   //   }
@@ -31,7 +33,7 @@ const LogIn = () => {
   const signInWithEAP = () => {
     signInWithEmailAndPassword(auth, email, password);
       setIsAuth(true);
-      navigate("/admin", { replace: true });
+      navigate("/admin/add-post", { replace: true });
   }
 
   return (
@@ -55,10 +57,13 @@ const LogIn = () => {
           <button onClick={signInWithEAP}>Sign In</button>
         </form>
       </div>
-      <h1>Or</h1>
+      {/* <h1>Or</h1>
       <div>
         <p>Sign in with google to continue</p>
         <button onClick={signInWithGoogle}>Sign in with google</button>
+      </div> */}
+      <div>
+        <p>Don't have an account? <span><Link to="/admin/signup">Sign Up</Link></span></p>
       </div>
     </div>
   );

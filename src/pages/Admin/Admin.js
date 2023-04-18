@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { db, auth, storage } from "../../components/firebase_config";
 import { signOut } from "firebase/auth";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import { v4 } from "uuid";
@@ -22,7 +22,7 @@ const Admin = () => {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
-      navigate("/login");
+      navigate("/admin/login");
     });
   };
 
@@ -41,7 +41,7 @@ const Admin = () => {
   const q = query(blogsCollectionRef, orderBy("createdAt", "desc"));
 
   const createPost = async () => {
-    await addDoc(blogsCollectionRef, q, {
+    await addDoc(blogsCollectionRef, {
       title,
       excerpt,
       col1,
@@ -50,7 +50,7 @@ const Admin = () => {
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
       createdAt: Timestamp.now(),
       pic1URL,
-      pic2URL,
+      pic2URL,80
     });
   };
 
@@ -62,7 +62,13 @@ const Admin = () => {
     } catch (err) {
       console.log(err.message);
     }
+
+    getDownloadURL(ref(storage, `images/${pic1.name + v4()}`))
+      .then((result) => {
+        setPic1URL(result);
+      })
   };
+
 
   const uploadPictures = async () => {
     if (pic2 === "null") return;

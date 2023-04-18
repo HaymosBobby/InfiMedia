@@ -24,14 +24,15 @@ const NavBar = () => {
   const [opened, setOpened] = useState(false);
 
   window.onscroll = () => {
-    
-      window.scrollY > 100
-        ? document.querySelector(".navbar").classList.add("sticky")
-        : document.querySelector(".navbar").classList.remove("sticky");
-    
-    // setOpened(false);
+    window.scrollY > 100
+      ? document.querySelector(".navbar").classList.add("sticky")
+      : document.querySelector(".navbar").classList.remove("sticky");
 
-    //  document.querySelector(".mobile_navigations").classList.remove("display_mobile_nav");
+    setOpened(false);
+
+    document
+      .querySelector(".mobile_navigations")
+      .classList.remove("display_mobile_nav");
   };
 
   const displayMobileNav = () => {

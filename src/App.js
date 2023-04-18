@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import PodcastPage from "./pages/PodcastPage";
 import SingleBlog from "./pages/SingleBlog";
 import Admin from "./pages/Admin/Admin";
+import PageNotFound from "./pages/PageNotFound";
 import WithoutNav from "./WithoutNav";
 import WithNav from "./WithNav";
 
@@ -22,15 +23,15 @@ function App() {
         <Routes>
           <Route element={<WithoutNav />}>
             <Route
-              path="/admin"
+              path="/admin/add-post"
               element={
                 <ProtectedRoutes>
                   <Admin />
                 </ProtectedRoutes>
               }
             />
-            <Route exact path="/login" element={<LogIn />} />
-            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/admin/login" element={<LogIn />} />
+            <Route exact path="/admin/signup" element={<SignUp />} />
           </Route>
           <Route element={<WithNav />}>
             <Route exact path="/" element={<Home />} />
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/podcast" element={<PodcastPage />} />
             <Route exact path="/blog-article" element={<SingleBlog />} />
             <Route exact path="/about" element={<About />} />
+            <Route exact path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </AuthContextProvider>
